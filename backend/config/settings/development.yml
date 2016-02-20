@@ -1,0 +1,11 @@
+security:
+  password_length: 4
+  auth:
+    token_ttl: <%= 1.minute %>
+    token_refresh_period: <%= 2.minutes %>
+
+telegram:
+  bin: ~/tg/bin/telegram-cli
+  pub_key: ~/tg/tg-server.pub
+  host: localhost
+  port: 2391
