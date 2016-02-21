@@ -11,7 +11,7 @@ RSpec.describe Api::V1::NotificationsController, type: :controller do
 
   describe '#index' do
     context 'when there are less than 25 notifications' do
-      let!(:payment_notification) do
+      let!(:receipt_notification) do
         create :receipt_invitation, user_id: session.user_id
       end
       let!(:debt_notification) do
@@ -22,7 +22,7 @@ RSpec.describe Api::V1::NotificationsController, type: :controller do
 
       it 'assigns @notifications' do
         expect(assigns(:notifications)).to eq([debt_notification,
-                                               payment_notification])
+                                               receipt_notification])
       end
     end
 

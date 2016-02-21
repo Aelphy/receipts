@@ -8,7 +8,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe 'POST #create' do
     context 'with valid attributes' do
-      let(:user_attributes) { FactoryGirl.attributes_for(:user) }
+      let(:user_attributes) { FactoryGirl.build(:user).attributes }
 
       it 'creates a new user' do
         expect { post :create, user_attributes }.to change { User.count }.by(1)
@@ -30,7 +30,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     context 'with invalid attributes' do
       context 'when phone is duplicate' do
         let!(:user) { create :user }
-        let(:user_attributes) { FactoryGirl.attributes_for(:user) }
+        let(:user_attributes) { FactoryGirl.build(:user).attributes }
         let(:wrong_user_attributes) { user_attributes.merge(phone: user.phone) }
 
         before { post :create, wrong_user_attributes }

@@ -50,9 +50,9 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
     end
   end
 
-  describe 'DELETE #destroy' do
+  describe 'DELETE #delete' do
     context 'when token was not provided' do
-      before { delete :destroy }
+      before { delete :delete }
 
       it { expect(response).to have_http_status(:bad_request) }
       it { expect(response.body).to include('token', 'required') }
@@ -65,7 +65,7 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
 
         before do
           set_auth_header(auth)
-          delete :destroy
+          delete :delete
         end
 
         it { expect(response).to have_http_status(:ok) }
@@ -80,7 +80,7 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
         before do
           session
           set_auth_header(auth)
-          delete :destroy
+          delete :delete
         end
 
         it { expect(response).to have_http_status(:not_found) }
