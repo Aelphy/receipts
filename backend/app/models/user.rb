@@ -1,7 +1,18 @@
 class User < ActiveRecord::Base
+  has_many :group_users
   has_many :item_users
+  has_many :currency_users
   has_many :items,                       through: :item_users,
                                          dependent: :destroy
+  has_many :currencies,                  through: :currency_users,
+                                         dependent: :destroy
+  has_many :income_receipt_invitations,  class_name: 'ReceiptInvitation',
+                                         foreign_key: 'participant_id',
+                                         dependent: :destroy
+  has_many :outcome_receipt_invitations, class_name: 'ReceiptInvitation',
+                                         foreign_key: 'inviter_id',
+                                         dependent: :destroy
+  has_many :notifications,               dependent: :destroy
   has_many :sessions,                    dependent: :destroy
 
   before_validation :set_default_fields, on: :create
