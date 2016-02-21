@@ -4,13 +4,10 @@ import {
   ROUTER_DIRECTIVES
 } from 'angular2/router';
 
-import {HomeCmp} from '../../home/components/home';
-import {AboutCmp} from '../../about/components/about';
-import {NameList} from '../../shared/services/name_list';
+import {SignInCmp} from './pages/signin/signin';
 
 @Component({
   selector: 'app',
-  viewProviders: [NameList],
   moduleId: module.id,
   templateUrl: './app.html',
   styleUrls: ['./app.css'],
@@ -18,7 +15,6 @@ import {NameList} from '../../shared/services/name_list';
   directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-  { path: '/', component: HomeCmp, name: 'Home' },
-  { path: '/about', component: AboutCmp, name: 'About' }
+    { path: '/', component: SignInCmp, name: 'SignIn' }
 ])
 export class AppCmp {}
