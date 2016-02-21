@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, Output, EventEmitter} from 'angular2/core';
 import {FormBuilder, Validators, CORE_DIRECTIVES, FORM_DIRECTIVES, ControlGroup} from 'angular2/common';
 
 @Component({
@@ -10,6 +10,7 @@ import {FormBuilder, Validators, CORE_DIRECTIVES, FORM_DIRECTIVES, ControlGroup}
 })
 export class SignInCmp {
   form: ControlGroup;
+  @Output() onSignIn = new EventEmitter();
 
   constructor(formBuilder: FormBuilder) {
     this.form = formBuilder.group({
@@ -25,6 +26,7 @@ export class SignInCmp {
   signIn() {
     console.log('SignIn');
     console.log(this.form);
+    this.onSignIn.emit('event');
   }
 
   password() {
