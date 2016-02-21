@@ -27,3 +27,7 @@
   -webkit-user-select: none;
   user-select: none;
 }
+
+.b-main.mdl-progress {
+  width: 100%;
+}
