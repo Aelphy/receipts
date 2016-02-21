@@ -31,7 +31,7 @@ module Api
         render_ok(token: @session.token)
       end
 
-      def destroy
+      def delete
         token, _options = auth.token_and_options(request)
 
         unless token

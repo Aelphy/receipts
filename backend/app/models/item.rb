@@ -1,3 +1,4 @@
+# TODO: think about images for items and about separate currencies. It could be that one receipt was paid using several currencies
 class Item < ActiveRecord::Base
   has_many :item_users
   has_many :users, through: :item_users, dependent: :destroy

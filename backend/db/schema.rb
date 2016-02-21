@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221002425) do
+ActiveRecord::Schema.define(version: 20160221113246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20160221002425) do
     t.integer  "currency_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.integer  "reference_id"
+    t.string   "type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "item_users", force: :cascade do |t|
@@ -75,6 +86,7 @@ ActiveRecord::Schema.define(version: 20160221002425) do
     t.integer  "total_price"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.date     "date"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -107,4 +119,18 @@ ActiveRecord::Schema.define(version: 20160221002425) do
 
   add_index "users", ["phone"], name: "index_users_on_phone", using: :btree
 
+  add_foreign_key "currency_users", "currencies", name: "currency_users_currency_id_fk"
+  add_foreign_key "currency_users", "users", name: "currency_users_user_id_fk"
+  add_foreign_key "images", "receipts", column: "reference_id", name: "images_reference_id_fk"
+  add_foreign_key "item_users", "items", name: "item_users_item_id_fk"
+  add_foreign_key "item_users", "users", name: "item_users_user_id_fk"
+  add_foreign_key "items", "amount_types", name: "items_amount_type_id_fk"
+  add_foreign_key "items", "currencies", name: "items_currency_id_fk"
+  add_foreign_key "items", "receipts", name: "items_receipt_id_fk"
+  add_foreign_key "notifications", "receipts", column: "reference_id", name: "notifications_reference_id_fk"
+  add_foreign_key "notifications", "users", column: "author_id", name: "notifications_author_id_fk"
+  add_foreign_key "notifications", "users", name: "notifications_user_id_fk"
+  add_foreign_key "receipts", "currencies", name: "receipts_currency_id_fk"
+  add_foreign_key "receipts", "users", column: "creditor_id", name: "receipts_creditor_id_fk"
+  add_foreign_key "sessions", "users", name: "sessions_user_id_fk"
 end
