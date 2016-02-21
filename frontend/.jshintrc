@@ -54,6 +54,8 @@
     "browser": true,
     "node": true,
 
+    
+
     "globals": {
         "angular": false,
         "ng": false

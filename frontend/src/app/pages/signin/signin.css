@@ -1,3 +1,23 @@
 .b-signin {
-  background: #A88E8E;
+  width: 200px;
+  
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  margin-left: -100px;
+}
+
+.b-signin .l-btn-wrapper {
+  padding: 10px 0;
+}
+.b-signin .l-btn-wrapper button {
+  width: 100%;
+}
+
+.b-signin .l-logo-wrapper {
+  text-align: center;
+}
+.b-signin .l-logo-wrapper i {
+  font-size: 50px;
+  cursor: default;
 }
