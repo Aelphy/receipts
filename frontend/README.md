@@ -1,289 +1,225 @@
-[![taylor swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
-[![volkswagen status](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen) [![GitHub version](https://badge.fury.io/gh/angularclass%2Fangular2-webpack-starter.svg)](https://badge.fury.io/gh/angularclass%2Fangular2-webpack-starter) [![Dependency Status](https://david-dm.org/angularclass/angular2-webpack-starter.svg)](https://david-dm.org/angularclass/angular2-webpack-starter)
-[![Issue Stats](http://issuestats.com/github/angularclass/angular2-webpack-starter/badge/pr?style=flat)](http://issuestats.com/github/angularclass/angular2-webpack-starter)
-[![Issue Stats](http://issuestats.com/github/angularclass/angular2-webpack-starter/badge/issue?style=flat)](http://issuestats.com/github/angularclass/angular2-webpack-starter) [![Stack Share](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](http://stackshare.io/angularclass/angular-2-webpack-starter)
+# Introduction
 
-<p align="center">
-  <a href="https://angularclass.com" target="_blank">
-    <img src="https://cloud.githubusercontent.com/assets/1016365/9863762/a84fed4a-5af7-11e5-9dde-d5da01e797e7.png" alt="Webpack and Angular 2" width="500" height="320"/>
-  </a>
-</p>
+[![Build Status](https://travis-ci.org/mgechev/angular2-seed.svg?branch=master)](https://travis-ci.org/mgechev/angular2-seed)
+[![Join the chat at https://gitter.im/mgechev/angular2-seed](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mgechev/angular2-seed?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+[![Dependency Status](https://david-dm.org/mgechev/angular2-seed.svg)](https://david-dm.org/mgechev/angular2-seed)
+[![devDependency Status](https://david-dm.org/mgechev/angular2-seed/dev-status.svg)](https://david-dm.org/mgechev/angular2-seed#info=devDependencies)
 
-# Angular2 Webpack Starter [![Join Slack](https://img.shields.io/badge/slack-join-brightgreen.svg)](https://angularclass.com/slack-join) [![Join the chat at https://gitter.im/angularclass/angular2-webpack-starter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/angularclass/angular2-webpack-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+A seed project for Angular 2 apps.
 
+It is something similar to the Angular Quick Start but does the entire build with gulp.
 
-> An Angular 2 starter kit featuring [Angular 2](https://angular.io) ([Router](https://angular.io/docs/js/latest/api/router/), [Forms](https://angular.io/docs/js/latest/api/forms/),
-[Http](https://angular.io/docs/js/latest/api/http/),
-[Services](https://gist.github.com/gdi2290/634101fec1671ee12b3e#_follow_@AngularClass_on_twitter),
-[Tests](https://angular.io/docs/js/latest/api/test/), [E2E](https://angular.github.io/protractor/#/faq#what-s-the-difference-between-karma-and-protractor-when-do-i-use-which-)), [Karma](https://karma-runner.github.io/), [Protractor](https://angular.github.io/protractor/), [Jasmine](https://github.com/jasmine/jasmine), [Istanbul](https://github.com/gotwarlost/istanbul), [TypeScript](http://www.typescriptlang.org/), [Typings](https://github.com/typings/typings), and [Webpack](http://webpack.github.io/) by [AngularClass](https://angularclass.com).
+`angular2-seed` provides the following features:
 
-> If you're looking for Angular 1.x please use [NG6-starter](https://github.com/angularclass/NG6-starter)  
-> If you're looking to learn about Webpack and ES6 Build Tools check out [ES6-build-tools](https://github.com/AngularClass/ES6-build-tools)  
-> If you're looking to learn TypeScript see [TypeStrong/learn-typescript](https://github.com/TypeStrong/learn-typescript)
+- Ready to go, statically typed build system using gulp for working with TypeScript.
+- Production and development builds.
+- Sample unit tests with Jasmine and Karma.
+- End-to-end tests with Protractor.
+- Development server with Livereload.
+- Following the best practices for your application’s structure.
+- Manager of your type definitions using [typings](https://github.com/typings/typings).
+- Basic Service Worker, which implements "Cache then network strategy".
 
-This seed repo serves as an Angular 2 starter for anyone looking to get up and running with Angular 2 and TypeScript fast. Using a [Webpack](http://webpack.github.io/) for building our files and assisting with boilerplate. We're also using Protractor for our end-to-end story and Karma for our unit tests.
-* Best practices in file and application organization for Angular 2.
-* Ready to go build system using Webpack for working with TypeScript.
-* Angular 2 examples that are ready to go when experimenting with Angular 2.
-* A great Angular 2 seed repo for anyone who wants to start their project.
-* Testing Angular 2 code with Jasmine and Karma.
-* Coverage with Istanbul and Karma
-* End-to-end Angular 2 code using Protractor.
-* Type manager with Typings
+# How to start
 
-### Quick start
-> Clone/Download the repo then edit `app.ts` inside [`/src/app/app.ts`](/src/app/app.ts)
+**Note** that this seed project requires node v4.x.x or higher and npm 2.14.7.
+
+You must have `ts-node` installed as global. If you don't, use:
 
 ```bash
-# clone our repo
-# --depth 1 removes all but one .git commit history
-git clone --depth 1 https://github.com/angularclass/angular2-webpack-starter.git
+npm install -g ts-node
+```
 
-# change directory to our repo
-cd angular2-webpack-starter
+In order to start the seed use:
 
-# install the repo with npm
+
+```bash
+git clone --depth 1 https://github.com/mgechev/angular2-seed.git
+cd angular2-seed
+# install the project's dependencies
 npm install
-
-# start the server
+# watches your files and uses livereload by default
 npm start
-```
-go to [http://0.0.0.0:3000](http://0.0.0.0:3000) or [http://localhost:3000](http://localhost:3000) in your browser
+# api document for the app
+npm run docs
 
-# Table of Contents
-* [File Structure](#file-structure)
-* [Getting Started](#getting-started)
-    * [Dependencies](#dependencies)
-    * [Installing](#installing)
-    * [Running the app](#running-the-app)
-* [Contributing](#contributing)
-* [TypeScript](#typescript)
-* [Typings](#typings)
-* [Frequently asked questions](#frequently-asked-questions)
-* [Support, Questions, or Feedback](#support-questions-or-feedback)
-* [License](#license)
-
-
-## File Structure
-We use the component approach in our starter. This is the new standard for developing Angular apps and a great way to ensure maintainable code by encapsulation of our behavior logic. A component is basically a self contained app usually in a single file or a folder with each concern as a file: style, template, specs, e2e, and component class. Here's how it looks:
-```
-angular2-webpack-starter/
- ├──src/                       * our source files that will be compiled to javascript
- |   ├──main.ts                * our entry file for our browser environment
- │   │
- |   ├──index.html             * Index.html: where we generate our index page
- │   │
- |   ├──polyfills.ts           * our polyfills file
- │   │
- │   ├──app/                   * WebApp: folder
- │   │   ├──app.spec.ts        * a simple test of components in app.ts
- │   │   ├──app.e2e.ts        * a simple end-to-end test for /
- │   │   └──app.ts             * App.ts: a simple version of our App component components
- │   │
- │   └──assets/                * static assets are served here
- │       ├──icon/              * our list of icons from www.favicon-generator.org
- │       ├──service-worker.js  * ignore this. Web App service worker that's not complete yet
- │       ├──robots.txt         * for search engines to crawl your website
- │       └──human.txt          * for humans to know who the developers are
- │
- ├──spec-bundle.js             * ignore this magic that sets up our angular 2 testing environment
- ├──karma.config.js            * karma config for our unit tests
- ├──protractor.config.js       * protractor config for our end-to-end tests
- │
- ├──tsconfig.json              * config that webpack uses for typescript
- ├──typings.json               * our typings manager
- ├──package.json               * what npm uses to manage it's dependencies
- │
- ├──webpack.config.js          * our development webpack config
- ├──webpack.test.config.js     * our testing webpack config
- └──webpack.prod.config.js     * our production webpack config
+# dev build
+npm run build.dev
+# prod build
+npm run build.prod
 ```
 
-# Getting Started
-## Dependencies
-What you need to run this app:
-* `node` and `npm` (`brew install node`)
-* Ensure you're running the latest versions Node `v4.1.x`+ and NPM `2.14.x`+
+_Does not rely on any global dependencies._
 
-Once you have those, you should install these globals with `npm install --global`:
-* `webpack` (`npm install --global webpack`)
-* `webpack-dev-server` (`npm install --global webpack-dev-server`)
-* `karma` (`npm install --global karma-cli`)
-* `protractor` (`npm install --global protractor`)
-* `typings` (`npm install --global typings`)
-* `typescript` (`npm install --global typescript`)
+# Table of Content
 
-## Installing
-* `fork` this repo
-* `clone` your fork
-* `npm install` to install all dependencies
-* `typings install` to install necessary typings
-* `npm run server` to start the dev server in another tab
+- [Introduction](#introduction)
+- [How to start](#how-to-start)
+- [Table of Content](#table-of-content)
+- [Configuration](#configuration)
+- [How to extend?](#how-to-extend)
+- [Running tests](#running-tests)
+- [Contributing](#contributing)
+- [Examples](#examples)
+- [Directory Structure](#directory-structure)
+- [Contributors](#contributors)
+- [Change Log](#change-log)
+- [License](#license)
 
-## Running the app
-After you have installed all dependencies you can now run the app. Run `npm run server` to start a local server using `webpack-dev-server` which will watch, build (in-memory), and reload for you. The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv6, if you're using `express` server, then it's `http://[::1]:3000/`).
+# Configuration
 
-### server
+Default application server configuration
+
+```javascript
+var PORT             = 5555;
+var LIVE_RELOAD_PORT = 4002;
+var DOCS_PORT        = 4003;
+var APP_BASE         = '/';
+```
+
+Configure at runtime
+
 ```bash
-# development
-npm run server
-# production
-npm run build:prod
-npm run server:prod
+npm start -- --port 8080 --reload-port 4000 --base /my-app/
 ```
 
-## Other commands
+# How to extend?
 
-### build files
-```bash
-# development
-npm run build:dev
-# production
-npm run build:prod
-```
+Visit the [Wiki page](https://github.com/mgechev/angular2-seed/wiki) of the project.
 
-### watch and build files
-```bash
-npm run watch
-```
+# Running tests
 
-### run tests
 ```bash
-npm run test
-```
+npm test
 
-### watch and run our tests
-```bash
-npm run watch:test
-```
+# Debug - In two different shell windows
+npm run build.test.watch      # 1st window
+npm run karma.start           # 2nd window
 
-### run end-to-end tests
-```bash
-# make sure you have your server running in another terminal
+# e2e (aka. end-to-end, integration) - In three different shell windows
+# Make sure you don't have a global instance of Protractor
+# npm run webdriver-update <- You will need to run this the first time
+npm run webdriver-start
+npm run serve.e2e
 npm run e2e
-```
 
-### run webdriver (for end-to-end)
-```bash
-npm run webdriver:update
-npm run webdriver:start
+# e2e live mode - Protractor interactive mode
+# Instead of last command above, you can use:
+npm run e2e.live
 ```
-
-### run Protractor's elementExplorer (for end-to-end)
-```bash
-npm run webdriver:start
-# in another terminal
-npm run e2e:live
-```
-
+You can learn more about [Protractor Interactive Mode here](https://github.com/angular/protractor/blob/master/docs/debugging.md#testing-out-protractor-interactively)
 
 # Contributing
-You can include more examples as components but they must introduce a new concept such as `Home` component (separate folders), and Todo (services). I'll accept pretty much everything so feel free to open a Pull-Request
 
-# TypeScript
-> To take full advantage of TypeScript with autocomplete you would have to install it globally and use an editor with the correct TypeScript plugins.
+Please see the [CONTRIBUTING](https://github.com/mgechev/angular2-seed/blob/master/CONTRIBUTING.md) file for guidelines.
 
-## Use latest TypeScript compiler
-TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you installed TypeScript previously.
+# Examples
 
-```
-npm install --global typescript
-```
+Forks of this project demonstrate how to extend and integrate with other libraries:
 
-## Use a TypeScript-aware editor
-We have good experience using these editors:
+ - https://github.com/justindujardin/angular2-seed - integration with [ng2-material](https://github.com/justindujardin/ng2-material)
+ - https://github.com/AngularShowcase/angular2-sample-app - sample Angular 2 application
+ - https://github.com/AngularShowcase/ng2-bootstrap-sbadmin - ng2-bootstrap-sbadmin
+ - https://github.com/AngularShowcase/angular2-seed-ng2-highcharts - Simple application including a [Highcharts](http://www.highcharts.com) graph.
+ - https://github.com/tarlepp/angular-sailsjs-boilerplate-frontend-angular2 - Example application for [Sails.js](http://sailsjs.org/) integration.
+ - https://github.com/ludohenin/ng2-wp-blog - Angular 2 application using Wordpress [JSON-API](http://v2.wp-api.org) backend.
 
-* [Visual Studio Code](https://code.visualstudio.com/)
-* [Webstorm 10](https://www.jetbrains.com/webstorm/download/)
-* [Atom](https://atom.io/) with [TypeScript plugin](https://atom.io/packages/atom-typescript)
-* [Sublime Text](http://www.sublimetext.com/3) with [Typescript-Sublime-Plugin](https://github.com/Microsoft/Typescript-Sublime-plugin#installation)
-
-# Typings
-> When you include a module that doesn't include Type Definitions inside of the module you need to include external Type Definitions with Typings
-
-## Use latest Typings module
-```
-npm install --global typings
-```
-
-## Custom Type Definitions
-When including 3rd party modules you also need to include the type definition for the module
-if they don't provide one within the module. You can try to install it with typings
+# Directory Structure
 
 ```
-typings install node --save
+.
+├── CONTRIBUTING.md
+├── LICENSE
+├── README.md
+├── src
+│   ├── about
+│   │   └── components
+│   │       ├── about.e2e.ts
+│   │       ├── about.html
+│   │       ├── about.ts
+│   │       └── about.spec.ts
+│   ├── app
+│   │   └── components
+│   │       ├── app.css
+│   │       ├── app.e2e.ts
+│   │       ├── app.html
+│   │       ├── app.ts
+│   │       └── app.spec.ts
+│   ├── assets
+│   │   ├── img
+│   │   │   └── smile.png
+│   │   └── main.css
+│   ├── home
+│   │   └── components
+│   │       ├── home.css
+│   │       ├── home.html
+│   │       ├── home.ts
+│   │       ├── home.e2e.ts
+│   │       └── home.spec.ts
+│   ├── shared
+│   │   └── services
+│   │       ├── name_list.ts
+│   │       └── name_list.spec.ts
+│   ├── hot_loader_main.ts
+│   ├── main.ts
+│   └── index.html
+├── dist
+├── tools
+│   ├── manual_typings
+│   ├── tasks
+│   ├── utils
+│   ├── config.ts
+│   └── utils.ts
+├── appveyor.yml
+├── gulpfile.ts
+├── karma.conf.js
+├── package.json
+├── protractor.conf.js
+├── test-main.js
+├── tsconfig.json
+├── tslint.json
+└── typings.json
 ```
 
-If you can't find the type definition in the registry we can make an ambient definition in
-this file for now. For example
+# Contributors
 
-```typescript
-declare module "my-module" {
-  export function doesSomething(value: string): string;
-}
-```
+[<img alt="mgechev" src="https://avatars.githubusercontent.com/u/455023?v=3&s=117" width="117">](https://github.com/mgechev) |[<img alt="ludohenin" src="https://avatars.githubusercontent.com/u/1011516?v=3&s=117" width="117">](https://github.com/ludohenin) |[<img alt="tarlepp" src="https://avatars.githubusercontent.com/u/595561?v=3&s=117" width="117">](https://github.com/tarlepp) |[<img alt="NathanWalker" src="https://avatars.githubusercontent.com/u/457187?v=3&s=117" width="117">](https://github.com/NathanWalker) |[<img alt="aboeglin" src="https://avatars.githubusercontent.com/u/8297302?v=3&s=117" width="117">](https://github.com/aboeglin) |[<img alt="jesperronn" src="https://avatars.githubusercontent.com/u/6267?v=3&s=117" width="117">](https://github.com/jesperronn) |
+:---: |:---: |:---: |:---: |:---: |:---: |
+[mgechev](https://github.com/mgechev) |[ludohenin](https://github.com/ludohenin) |[tarlepp](https://github.com/tarlepp) |[NathanWalker](https://github.com/NathanWalker) |[aboeglin](https://github.com/aboeglin) |[jesperronn](https://github.com/jesperronn) |
 
+[<img alt="ryzy" src="https://avatars.githubusercontent.com/u/994940?v=3&s=117" width="117">](https://github.com/ryzy) |[<img alt="nareshbhatia" src="https://avatars.githubusercontent.com/u/1220198?v=3&s=117" width="117">](https://github.com/nareshbhatia) |[<img alt="d3viant0ne" src="https://avatars.githubusercontent.com/u/8420490?v=3&s=117" width="117">](https://github.com/d3viant0ne) |[<img alt="natarajanmca11" src="https://avatars.githubusercontent.com/u/9244766?v=3&s=117" width="117">](https://github.com/natarajanmca11) |[<img alt="JakePartusch" src="https://avatars.githubusercontent.com/u/6424140?v=3&s=117" width="117">](https://github.com/JakePartusch) |[<img alt="larsthorup" src="https://avatars.githubusercontent.com/u/1202959?v=3&s=117" width="117">](https://github.com/larsthorup) |
+:---: |:---: |:---: |:---: |:---: |:---: |
+[ryzy](https://github.com/ryzy) |[nareshbhatia](https://github.com/nareshbhatia) |[d3viant0ne](https://github.com/d3viant0ne) |[natarajanmca11](https://github.com/natarajanmca11) |[JakePartusch](https://github.com/JakePartusch) |[larsthorup](https://github.com/larsthorup) |
 
-If you're prototyping and you will fix the types later you can also declare it as type any
+[<img alt="ouq77" src="https://avatars.githubusercontent.com/u/1796191?v=3&s=117" width="117">](https://github.com/ouq77) |[<img alt="jerryorta-dev" src="https://avatars.githubusercontent.com/u/341155?v=3&s=117" width="117">](https://github.com/jerryorta-dev) |[<img alt="devanp92" src="https://avatars.githubusercontent.com/u/4533277?v=3&s=117" width="117">](https://github.com/devanp92) |[<img alt="evanplaice" src="https://avatars.githubusercontent.com/u/303159?v=3&s=117" width="117">](https://github.com/evanplaice) |[<img alt="LuxDie" src="https://avatars.githubusercontent.com/u/12536671?v=3&s=117" width="117">](https://github.com/LuxDie) |[<img alt="c-ice" src="https://avatars.githubusercontent.com/u/347238?v=3&s=117" width="117">](https://github.com/c-ice) |
+:---: |:---: |:---: |:---: |:---: |:---: |
+[ouq77](https://github.com/ouq77) |[jerryorta-dev](https://github.com/jerryorta-dev) |[devanp92](https://github.com/devanp92) |[evanplaice](https://github.com/evanplaice) |[LuxDie](https://github.com/LuxDie) |[c-ice](https://github.com/c-ice) |
 
-```typescript
-declare var assert: any;
-```
+[<img alt="ojacquemart" src="https://avatars.githubusercontent.com/u/1189345?v=3&s=117" width="117">](https://github.com/ojacquemart) |[<img alt="TuiKiken" src="https://avatars.githubusercontent.com/u/959821?v=3&s=117" width="117">](https://github.com/TuiKiken) |[<img alt="juristr" src="https://avatars.githubusercontent.com/u/542458?v=3&s=117" width="117">](https://github.com/juristr) |[<img alt="dstockhammer" src="https://avatars.githubusercontent.com/u/1156637?v=3&s=117" width="117">](https://github.com/dstockhammer) |[<img alt="dszymczuk" src="https://avatars.githubusercontent.com/u/539352?v=3&s=117" width="117">](https://github.com/dszymczuk) |[<img alt="briantopping" src="https://avatars.githubusercontent.com/u/158115?v=3&s=117" width="117">](https://github.com/briantopping) |
+:---: |:---: |:---: |:---: |:---: |:---: |
+[ojacquemart](https://github.com/ojacquemart) |[TuiKiken](https://github.com/TuiKiken) |[juristr](https://github.com/juristr) |[dstockhammer](https://github.com/dstockhammer) |[dszymczuk](https://github.com/dszymczuk) |[briantopping](https://github.com/briantopping) |
 
-If you're importing a module that uses Node.js modules which are CommonJS you need to import as
+[<img alt="dwido" src="https://avatars.githubusercontent.com/u/154235?v=3&s=117" width="117">](https://github.com/dwido) |[<img alt="koodikindral" src="https://avatars.githubusercontent.com/u/6285484?v=3&s=117" width="117">](https://github.com/koodikindral) |[<img alt="johnjelinek" src="https://avatars.githubusercontent.com/u/873610?v=3&s=117" width="117">](https://github.com/johnjelinek) |[<img alt="justindujardin" src="https://avatars.githubusercontent.com/u/101493?v=3&s=117" width="117">](https://github.com/justindujardin) |[<img alt="lihaibh" src="https://avatars.githubusercontent.com/u/4681233?v=3&s=117" width="117">](https://github.com/lihaibh) |[<img alt="Brooooooklyn" src="https://avatars.githubusercontent.com/u/3468483?v=3&s=117" width="117">](https://github.com/Brooooooklyn) |
+:---: |:---: |:---: |:---: |:---: |:---: |
+[dwido](https://github.com/dwido) |[koodikindral](https://github.com/koodikindral) |[johnjelinek](https://github.com/johnjelinek) |[justindujardin](https://github.com/justindujardin) |[lihaibh](https://github.com/lihaibh) |[Brooooooklyn](https://github.com/Brooooooklyn) |
 
-```typescript
-import * as _ from 'lodash';
-```
+[<img alt="Bigous" src="https://avatars.githubusercontent.com/u/6886560?v=3&s=117" width="117">](https://github.com/Bigous) |[<img alt="tandu" src="https://avatars.githubusercontent.com/u/273313?v=3&s=117" width="117">](https://github.com/tandu) |[<img alt="mjwwit" src="https://avatars.githubusercontent.com/u/4455124?v=3&s=117" width="117">](https://github.com/mjwwit) |[<img alt="ocombe" src="https://avatars.githubusercontent.com/u/265378?v=3&s=117" width="117">](https://github.com/ocombe) |[<img alt="gdi2290" src="https://avatars.githubusercontent.com/u/1016365?v=3&s=117" width="117">](https://github.com/gdi2290) |[<img alt="typekpb" src="https://avatars.githubusercontent.com/u/499820?v=3&s=117" width="117">](https://github.com/typekpb) |
+:---: |:---: |:---: |:---: |:---: |:---: |
+[Bigous](https://github.com/Bigous) |[tandu](https://github.com/tandu) |[mjwwit](https://github.com/mjwwit) |[ocombe](https://github.com/ocombe) |[gdi2290](https://github.com/gdi2290) |[typekpb](https://github.com/typekpb) |
 
-You can include your type definitions in this file until you create one for the typings registry
-see [typings/registry](https://github.com/typings/registry)
+[<img alt="philipooo" src="https://avatars.githubusercontent.com/u/1702399?v=3&s=117" width="117">](https://github.com/philipooo) |[<img alt="redian" src="https://avatars.githubusercontent.com/u/816941?v=3&s=117" width="117">](https://github.com/redian) |[<img alt="markharding" src="https://avatars.githubusercontent.com/u/851436?v=3&s=117" width="117">](https://github.com/markharding) |[<img alt="robertpenner" src="https://avatars.githubusercontent.com/u/79827?v=3&s=117" width="117">](https://github.com/robertpenner) |[<img alt="sclausen" src="https://avatars.githubusercontent.com/u/916076?v=3&s=117" width="117">](https://github.com/sclausen) |[<img alt="tapas4java" src="https://avatars.githubusercontent.com/u/2254963?v=3&s=117" width="117">](https://github.com/tapas4java) |
+:---: |:---: |:---: |:---: |:---: |:---: |
+[philipooo](https://github.com/philipooo) |[redian](https://github.com/redian) |[markharding](https://github.com/markharding) |[robertpenner](https://github.com/robertpenner) |[sclausen](https://github.com/sclausen) |[tapas4java](https://github.com/tapas4java) |
 
-# Frequently asked questions
-* What's the current browser support for Angular 2 Beta?
-  * Please view the updated list of [browser support for Angular 2](https://github.com/angularclass/awesome-angular2#current-browser-support-for-angular-2)
-* Why is my service, aka provider, is not injecting parameter correctly?
-  * Please use `@Injectable()` for your service for typescript to correctly attach the metadata (this is a TypeScript problem)
-* How do I run protractor with node 0.12.x?
-  * please check out this repo to use the old version of protractor [#146](https://github.com/AngularClass/angular2-webpack-starter/pull/146/files)
-* Where do I write my tests?
-  * You can write your tests next to your component files. See [`/src/app/home/home.spec.ts`](/src/app/home/home.spec.ts)
-* How do I start the app when I get `EACCES` and `EADDRINUSE` errors?
-  * The `EADDRINUSE` error means the port `3000` is currently being used and `EACCES` is lack of permission for webpack to build files to `./dist/`
-* How to use `sass` for css?
- * `loaders: ['raw-loader','sass-loader']` and `@Component({ styles: [ require('./filename.scss') ] })` see issue [#136](https://github.com/AngularClass/angular2-webpack-starter/issues/136)
-* How do I test a Service?
- * See issue [#130](https://github.com/AngularClass/angular2-webpack-starter/issues/130#issuecomment-158872648)
-* How do I add `vscode-chrome-debug` support?
- * The VS Code chrome debug extension support can be done via `launch.json` see issue [#144](https://github.com/AngularClass/angular2-webpack-starter/issues/144#issuecomment-164063790)
-* How do I make the repo work in a virtual machine?
- * You need to use `0.0.0.0` so revert these changes [#205](https://github.com/AngularClass/angular2-webpack-starter/pull/205/files)
-* What are the naming conventions for Angular 2?
- * please see issue [#185](https://github.com/AngularClass/angular2-webpack-starter/issues/185) and PR [196](https://github.com/AngularClass/angular2-webpack-starter/pull/196)
-* How do I include bootstrap or jQuery?
- * please see issue [#215](https://github.com/AngularClass/angular2-webpack-starter/issues/215) and [#214](https://github.com/AngularClass/angular2-webpack-starter/issues/214#event-511768416)
-* I'm getting an error about not finding my module that I installed?
- * please see [How to include or create custom type definitions](https://github.com/AngularClass/angular2-webpack-starter/wiki/How-to-include-or-create-custom-type-definitions) and [custom_typings.d.ts](https://github.com/AngularClass/angular2-webpack-starter/blob/master/src/custom_typings.d.ts)
-* How do I async load a component?
- * the component must have `.async.ts` and require using webpack `loader: () => require('./about/about')('About')`
+[<img alt="butterfieldcons" src="https://avatars.githubusercontent.com/u/12204784?v=3&s=117" width="117">](https://github.com/butterfieldcons) |[<img alt="jgolla" src="https://avatars.githubusercontent.com/u/1542447?v=3&s=117" width="117">](https://github.com/jgolla) |[<img alt="ultrasonicsoft" src="https://avatars.githubusercontent.com/u/4145169?v=3&s=117" width="117">](https://github.com/ultrasonicsoft) |
+:---: |:---: |:---: |
+[butterfieldcons](https://github.com/butterfieldcons) |[jgolla](https://github.com/jgolla) |[ultrasonicsoft](https://github.com/ultrasonicsoft) |
 
-# Support, Questions, or Feedback
-> Contact us anytime for anything about this repo or Angular 2
+# Change Log
 
-* [Chat: AngularClass.slack](http://angularclass.com/member-join/)
-* [Twitter: @AngularClass](https://twitter.com/AngularClass)
-* [Gitter: AngularClass/angular2-webpack-starter](https://gitter.im/angularclass/angular2-webpack-starter)
-
-___
-
-enjoy — **AngularClass**
-
-<br><br>
-
-[![AngularClass](https://cloud.githubusercontent.com/assets/1016365/9863770/cb0620fc-5af7-11e5-89df-d4b0b2cdfc43.png  "Angular Class")](https://angularclass.com)
-##[AngularClass](https://angularclass.com)
-> Learn AngularJS, Angular 2, and Modern Web Development from the best.
-> Looking for corporate Angular training, want to host us, or Angular consulting? patrick@angularclass.com
+You can follow the [Angular 2 change log here](https://github.com/angular/angular/blob/master/CHANGELOG.md).
 
 # License
- [MIT](/LICENSE)
+
+MIT

@@ -1,39 +1,22 @@
-/*
- * Providers provided by Angular
- */
 import {provide, enableProdMode} from 'angular2/core';
-import {bootstrap, ELEMENT_PROBE_PROVIDERS} from 'angular2/platform/browser';
-import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
-import {HTTP_PROVIDERS} from 'angular2/http';
+import {bootstrap} from 'angular2/platform/browser';
+import {ROUTER_PROVIDERS, APP_BASE_HREF} from 'angular2/router';
+import {AppCmp} from './app/components/app';
 
-const ENV_PROVIDERS = [];
+if ('<%= ENV %>' === 'prod') { enableProdMode(); }
 
-if ('production' === process.env.ENV) {
-  enableProdMode();
-} else {
-  ENV_PROVIDERS.push(ELEMENT_PROBE_PROVIDERS);
-}
+bootstrap(AppCmp, [
+  ROUTER_PROVIDERS,
+  provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' })
+]);
 
-/*
- * App Component
- * our top level component that holds all of our components
- */
-import {App} from './app/app';
-
-/*
- * Bootstrap our Angular app with a top level component `App` and inject
- * our Services and Providers into Angular's dependency injection
- */
-document.addEventListener('DOMContentLoaded', function main() {
-  bootstrap(App, [
-    ...ENV_PROVIDERS,
-    ...HTTP_PROVIDERS,
-    ...ROUTER_PROVIDERS,
-    provide(LocationStrategy, { useClass: HashLocationStrategy })
-  ])
-  .catch(err => console.error(err));
-
-});
-
-// For vendors for example jQuery, Lodash, angular2-jwt just import them anywhere in your app
-// Also see custom_typings.d.ts as you also need to do `typings install x` where `x` is your module
+// In order to start the Service Worker located at "./sw.js"
+// uncomment this line. More about Service Workers here
+// https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers
+// if ('serviceWorker' in navigator) {
+//   (<any>navigator).serviceWorker.register('./sw.js').then(function(registration) {
+//     console.log('ServiceWorker registration successful with scope: ',    registration.scope);
+//   }).catch(function(err) {
+//     console.log('ServiceWorker registration failed: ', err);
+//   });
+// }
