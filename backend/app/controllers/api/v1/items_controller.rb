@@ -2,6 +2,7 @@ module Api
   module V1
     class ItemsController < BaseController
       before_filter :set_receipt
+      before_filter :check_authority, except: [:index, :show]
 
       def index
         @items = @receipt.items.order(:name) # TODO: add this due to efficientcy considerations .page(params[:page])
@@ -71,6 +72,19 @@ module Api
                                    :db_failure,
                                    receipt: 'was not found')
         end
+      end
+
+      def check_authority
+        unless has_authority
+          return render_error_code(:unauthorized,
+                                   :no_permission,
+                                   receipt: 'no rights to change this receipt')
+        end
+      end
+
+      def has_authority
+        @receipt.users.pluck(:id).include?(current_user.id) ||
+          @receipt.creditor_id == current_user.id
       end
     end
   end

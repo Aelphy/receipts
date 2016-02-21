@@ -41,47 +41,51 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:receipt) { create :receipt }
-    let(:item_attributes) { FactoryGirl.build(:item).attributes }
+    let(:item_attrs) { FactoryGirl.build(:item).attributes }
 
-    context 'when receipt exists' do
-      context 'with valid attributes' do
-        it 'creates a new item' do
-          expect do
-            post :create, item_attributes.merge(receipt_id: receipt.id)
-          end.to change { Item.count }.by(1)
+    context 'when authorized' do
+      let(:receipt) { create :receipt, creditor: session.user }
+
+      context 'when receipt exists' do
+        context 'with valid attributes' do
+          before do
+            post :create, item_attrs.merge(receipt_id: receipt.id)
+          end
+
+          it { expect(Item.count).to eq(1) }
+          it { expect(response).to have_http_status(:ok) }
         end
 
-        it 'responds with 200 status-code' do
-          post :create, item_attributes.merge(receipt_id: receipt.id)
+        context 'with invalid attributes' do
+          before do
+            item_attrs.delete('amount_type_id')
+            post :create, item_attrs.merge(receipt_id: receipt.id)
+          end
 
-          expect(response).to have_http_status(:ok)
+          it { expect(Item.count).to eq(0) }
+          it { expect(response).to have_http_status(:bad_request) }
+          it { expect(response.body).to include('amount_type_id', "can't be blank") }
         end
       end
 
-      context 'with invalid attributes' do
-        before { item_attributes.delete('amount_type_id') }
+      context 'when receipt does not exist' do
+        before { get :index, item_attrs.merge(receipt_id: -1) }
 
-        it 'does not create a new item' do
-          expect do
-            post :create, item_attributes.merge(receipt_id: receipt.id)
-          end.not_to change { Item.count }
-        end
-
-        it 'responds with 400 status-code' do
-          post :create, item_attributes.merge(receipt_id: receipt.id)
-
-          expect(response).to have_http_status(:bad_request)
-          expect(response.body).to include('amount_type_id', "can't be blank")
-        end
+        it { expect(response).to have_http_status(:not_found) }
+        it { expect(response.body).to include('receipt', 'was not found') }
       end
     end
 
-    context 'when receipt does not exist' do
-      before { get :index, item_attributes.merge(receipt_id: -1) }
+    context 'when not authorized' do
+      let(:receipt) { create :receipt }
 
-      it { expect(response).to have_http_status(:not_found) }
-      it { expect(response.body).to include('receipt', 'was not found') }
+      before do
+        post :create, item_attrs.merge(receipt_id: receipt.id)
+      end
+
+      it { expect(Item.count).to eq(0) }
+      it { expect(response).to have_http_status(:unauthorized) }
+      it { expect(response.body).to include('receipt', 'no rights to change this receipt') }
     end
   end
 
@@ -91,75 +95,103 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
     # end
 
   describe 'PUT #update' do
-    let(:receipt) { create :receipt }
-    let(:item) { create :item, receipt: receipt }
+    context 'when authorized' do
+      let(:receipt) { create :receipt, creditor: session.user }
+      let(:item) { create :item, receipt: receipt }
 
-    context 'when receipt exists' do
-      context 'when item exists' do
+      context 'when receipt exists' do
+        context 'when item exists' do
 
-        context 'with valid attributes' do
-          before do
-            put :update, {id: item.id, name: 'pr'}.merge(receipt_id: receipt.id)
+          context 'with valid attributes' do
+            before do
+              put :update, {id: item.id, name: 'pr'}.merge(receipt_id: receipt.id)
+            end
+
+            it { expect(response).to have_http_status(:ok) }
           end
 
-          it { expect(response).to have_http_status(:ok) }
+          context 'with invalid attributes' do
+            before do
+              put :update, {id: item.id, name: ''}.merge(receipt_id: receipt.id)
+            end
+
+            it { expect(response).to have_http_status(:bad_request) }
+            it { expect(response.body).to include('name', "can't be blank") }
+          end
         end
 
-        context 'with invalid attributes' do
+        context 'when item does not exist' do
           before do
-            put :update, {id: item.id, name: ''}.merge(receipt_id: receipt.id)
+            put :update, {id: -1, name: 'pr'}.merge(receipt_id: receipt.id)
           end
 
-          it { expect(response).to have_http_status(:bad_request) }
-          it { expect(response.body).to include('name', "can't be blank") }
+          it { expect(response).to have_http_status(:not_found) }
+          it { expect(response.body).to include('item', 'not found') }
         end
       end
 
-      context 'when item does not exist' do
+      context 'when receipt does not exist' do
         before do
-          put :update, {id: -1, name: 'pr'}.merge(receipt_id: receipt.id)
+          put :update, {id: item.id, name: 'pr'}.merge(receipt_id: -1)
         end
 
         it { expect(response).to have_http_status(:not_found) }
-        it { expect(response.body).to include('item', 'not found') }
+        it { expect(response.body).to include('receipt', 'was not found') }
       end
     end
 
-    context 'when receipt does not exist' do
+    context 'when not authorized' do
+      let(:receipt) { create :receipt }
+      let(:item) { create :item, receipt: receipt }
+
       before do
-        put :update, {id: item.id, name: 'pr'}.merge(receipt_id: -1)
+        put :update, {id: item.id, name: 'pr'}.merge(receipt_id: receipt.id)
       end
 
-      it { expect(response).to have_http_status(:not_found) }
-      it { expect(response.body).to include('receipt', 'was not found') }
+      it { expect(response).to have_http_status(:unauthorized) }
+      it { expect(response.body).to include('receipt', 'no rights to change this receipt') }
     end
   end
 
   describe 'DELETE #delete' do
-    let(:receipt) { create :receipt }
-    let(:item) { create :item, receipt: receipt }
+    context 'when authorized' do
+      let(:receipt) { create :receipt, creditor: session.user }
+      let(:item) { create :item, receipt: receipt }
 
-    context 'when receipt exists' do
-      context 'when item exists' do
-        before { delete :delete, {id: item.id}.merge(receipt_id: receipt.id) }
+      context 'when receipt exists' do
+        context 'when item exists' do
+          before { delete :delete, {id: item.id}.merge(receipt_id: receipt.id) }
 
-        it { expect(response).to have_http_status(:ok) }
-        it { expect(Item.count).to eq(0) }
+          it { expect(response).to have_http_status(:ok) }
+          it { expect(Item.count).to eq(0) }
+        end
+
+        context 'when item does not exist' do
+          before { delete :delete, {id: -1}.merge(receipt_id: receipt.id) }
+
+          it { expect(response).to have_http_status(:not_found) }
+          it { expect(response.body).to include('item', 'was not found') }
+        end
       end
 
-      context 'when item does not exist' do
-        before { delete :delete, {id: -1}.merge(receipt_id: receipt.id) }
+      context 'when receipt does not exist' do
+        before { delete :delete, {id:  item.id}.merge(receipt_id: -1) }
 
         it { expect(response).to have_http_status(:not_found) }
-        it { expect(response.body).to include('item', 'was not found') }
+        it { expect(response.body).to include('receipt', 'was not found') }
       end
     end
 
-    context 'when receipt does not exist' do
-      before { delete :delete, {id:  item.id}.merge(receipt_id: -1) }
+    context 'when not authorized' do
+      let(:receipt) { create :receipt }
+      let(:item) { create :item, receipt: receipt }
 
-      it { expect(response).to have_http_status(:not_found) }
-      it { expect(response.body).to include('receipt', 'was not found') }
+      before do
+        delete :delete, {id: item.id}.merge(receipt_id: receipt.id)
+      end
+
+      it { expect(response).to have_http_status(:unauthorized) }
+      it { expect(response.body).to include('receipt', 'no rights to change this receipt') }
     end
   end
 end

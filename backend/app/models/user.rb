@@ -2,15 +2,17 @@ class User < ActiveRecord::Base
   has_many :group_users
   has_many :item_users
   has_many :currency_users
+  has_many :receipt_users,               dependent: :destroy
   has_many :items,                       through: :item_users,
                                          dependent: :destroy
+  has_many :receipts,                    through: :receipt_users
   has_many :currencies,                  through: :currency_users,
                                          dependent: :destroy
   has_many :income_receipt_invitations,  class_name: 'ReceiptInvitation',
-                                         foreign_key: 'participant_id',
+                                         foreign_key: 'user_id',
                                          dependent: :destroy
   has_many :outcome_receipt_invitations, class_name: 'ReceiptInvitation',
-                                         foreign_key: 'inviter_id',
+                                         foreign_key: 'author_id',
                                          dependent: :destroy
   has_many :notifications,               dependent: :destroy
   has_many :sessions,                    dependent: :destroy

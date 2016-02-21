@@ -1,0 +1,2 @@
+class ReceiptUserController < ApplicationController
+end

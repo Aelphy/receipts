@@ -4,7 +4,8 @@ class ErrorCode < Hash
   def initialize
     %i(db_failure
        parameter_missing
-       wrong_parameter).each_with_index do |code, index|
+       wrong_parameter
+       no_permission).each_with_index do |code, index|
       self[code] = index
     end
   end

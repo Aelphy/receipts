@@ -15,4 +15,37 @@ RSpec.describe ReceiptInvitation, type: :model do
 
   it { expect(create :receipt_invitation, status: ReceiptInvitation.statuses.keys.sample).to be_valid }
   it { expect { create :receipt_invitation, status: 'wrong status' }.to raise_error(ArgumentError) }
+
+  describe '#create' do
+    it { expect(receipt_invitation.pending?).to be_truthy }
+  end
+
+  describe '#update' do
+    before do
+      ReceiptUser.create(user_id: receipt_invitation.user_id,
+                         receipt_id: receipt_invitation.reference_id)
+    end
+
+    context 'when declined' do
+      before { receipt_invitation.update(status: :declined) }
+
+      it 'destroys existing receipt user' do
+         expect(
+             ReceiptUser.where(receipt_id: receipt_invitation.reference_id,
+                               user_id: receipt_invitation.user_id).count
+         ).to eq(0)
+      end
+    end
+
+    context 'when confirmed' do
+      before { receipt_invitation.update(status: :confirmed) }
+
+      it 'does nothing with existing receipt user' do
+         expect(
+             ReceiptUser.where(receipt_id: receipt_invitation.reference_id,
+                               user_id: receipt_invitation.user_id).count
+         ).to eq(1)
+      end
+    end
+  end
 end

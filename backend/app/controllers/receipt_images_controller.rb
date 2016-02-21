@@ -1,0 +1,2 @@
+class ReceiptImagesController < ApplicationController
+end

@@ -39,3 +39,4 @@ en:
     db_failure: Database operation failure
     parameter_missing: Parameter missing
     wrong_parameter: Wrong parameter passed
+    no_permission: Permission error

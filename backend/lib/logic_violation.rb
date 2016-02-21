@@ -1,0 +1,2 @@
+class LogicViolation < StandardError
+end
