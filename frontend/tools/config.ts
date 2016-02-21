@@ -70,7 +70,10 @@ export const DEV_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencie
   { src: 'rxjs/bundles/Rx.js', inject: 'libs', dest: JS_DEST },
   { src: 'angular2/bundles/angular2.js', inject: 'libs', dest: JS_DEST },
   { src: 'angular2/bundles/router.js', inject: 'libs', dest: JS_DEST },
-  { src: 'angular2/bundles/http.js', inject: 'libs', dest: JS_DEST }
+  { src: 'angular2/bundles/http.js', inject: 'libs', dest: JS_DEST },
+  { src: 'material-design-lite/dist/material.min.js', inject: 'libs', dest: JS_DEST },
+  { src: 'material-design-lite/dist/material.min.css', inject: true, dest: CSS_DEST },
+  { src: 'material-design-lite/dist/material-grid.min.css', inject: true, dest: CSS_DEST }
 ]);
 
 export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencies([
@@ -78,7 +81,10 @@ export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependenci
   { src: 'reflect-metadata/Reflect.js', inject: 'shims' },
   { src: 'es6-shim/es6-shim.min.js', inject: 'shims' },
   { src: 'systemjs/dist/system.js', inject: 'shims' },
-  { src: 'angular2/bundles/angular2-polyfills.min.js', inject: 'libs' }
+  { src: 'angular2/bundles/angular2-polyfills.min.js', inject: 'libs' },
+  { src: 'material-design-lite/dist/material.min.js', inject: 'libs', dest: JS_DEST },
+  { src: 'material-design-lite/dist/material.min.css', inject: true, dest: CSS_DEST },
+  { src: 'material-design-lite/dist/material-grid.min.css', inject: true, dest: CSS_DEST }
 ]);
 
 // Declare local files that needs to be injected
