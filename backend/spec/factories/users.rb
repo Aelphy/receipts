@@ -9,4 +9,14 @@ FactoryGirl.define do
     failed_login_count 0
     encrypted_password 'encrypted password'
   end
+
+  factory :user_with_currency, parent: :user do
+    transient do
+      currency { create(:currency) }
+    end
+
+    after(:create) do |user, evaluator|
+      create_list(:currency_user, 1, currency: evaluator.currency, user: user)
+    end
+  end
 end

@@ -20,4 +20,22 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      messages:
+        debtor_equals_creditor: Debtor and creditor cannot be the same
+        inviter_equals_user: User cannot invite himself to the group
+        user_operates_currency: doesn't operate with given currency
+        debt_debtor_is_wrong: Debt doesn't belong to the debtor
+
+  notifications:
+    messages:
+      sign_up: 'Your password to sign in Dorm is: %{password}'
+      new_password: 'Your new password to sign in Dorm is: %{password}'
+      income_payment: 'You have income %{value} %{currency} from %{creditor}'
+      slap: Would you be so kind to return me my money ?
+
+  error_codes:
+    db_failure: Database operation failure
+    parameter_missing: Parameter missing
+    wrong_parameter: Wrong parameter passed
