@@ -1,2 +1,0 @@
-class ReceiptInvitationsController < ApplicationController
-end

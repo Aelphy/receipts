@@ -1,2 +1,0 @@
-class ReceiptImagesController < ApplicationController
-end
